@@ -1,0 +1,166 @@
+% set the document type and the font size
+\documentclass[12pt]{article}
+
+% use Spanish package
+\usepackage[spanish]{babel}
+
+% set UTF-8 codification
+\usepackage[utf8]{inputenc}
+
+% load TABS package
+\usepackage{booktabs}
+
+% create the title
+\title{\textbf{Programación en ASM: 8085}}
+\date{2017-09-24}
+\author{Diego Enrique Fontán, CosasDePuma}
+
+% begin the document
+\begin{document}
+	% print the title
+	\maketitle
+	% no page number
+	\pagenumbering{gobble}
+	
+	\newpage
+	
+	% page of contents
+	\tableofcontents
+	
+	\newpage
+	
+	% first page number
+	\pagenumbering{arabic}
+	
+	% LICENCIA
+	
+	\textbf{Licencia y propósito de este documento}\\
+	
+	Este documento, creado por Diego Enrique Fontán (CosasDePuma), pretende ser un apoyo para todo aquel que esté estudiando o esté interesado en aprender a cómo programar en ensamblador 8085. Se da por hecho que el lector ha adquirido una placa similar al procesador 8085 Intel o que se ha apropiado de un software simulador.\\
+	
+	No calificaré de manual a este escrito, dado que tiene una finalidad más modesta. Es por ello que lo descrito aquí no serán más que un par de apuntes y recordatorios que el autor compartirá con cualquier interesado.\\
+	
+	La distribución y copia de este documento, así como la edición del mismo, está permitida siempre y cuando el autor original reciba las menciones correspondientes y sin que nadie se lucre a costa de este documento.\\
+	
+	\newpage
+	
+	\section{Operaciones de transferencia básicas}
+	
+	Las operaciones de transferencia son aquellas que nos permiten mover información.\\
+	Aquí es importante ver que podemos operar de varias maneras:
+	
+	% new table
+	% without [h!] the table is unlocked
+	
+	\begin{table}[h!]
+		
+		% center the table
+		\centering
+		
+		% name the table with a label
+		\label{tab:MODOS}
+		
+		%{c center ; l left ; r right ; | separator}
+		\begin{tabular}{c|cc}
+			\toprule
+			Tipo de operación & Destino & Origen     \\
+			\midrule
+			Inmediato & Registro & Valor               \\
+			Por Registro & Registro & Registro       \\
+			Directa & Registro & Dirección         \\
+			Indirecta & Registro & Puntero (Memoria) \\			
+			\bottomrule
+		\end{tabular}
+		
+	\end{table}
+	
+	\subsection{Inmediato (MVI)}
+	
+	El método de transferencia inmediato se usa para definir el valor de un Registro asignándole un valor.\\
+	
+	Este comando ocupa dos bytes: El primero para el opcode de la instrucción y el segundo para el valor en hexadecimal que queremos que sea asignado.
+	
+		\begin{table}[h!]
+		\centering
+		\label{tab:MOV3}
+		\begin{tabular}{c|c}
+			Instrucción & Opcode \\
+			\midrule
+			MVI A,valor & 3E \\
+			MVI B,valor & 06 \\
+			MVI C,valor & 0E \\
+			MVI D,valor & 16 \\
+			MVI E,valor & 1E \\
+			MVI H,valor & 26 \\
+			MVI L,valor & 2E \\
+			MVI M,valor & 36 \\
+		\end{tabular}
+	\end{table}
+	
+	\subsection{Por Registro (MOV)}
+	
+	El método de transferencia por Registro sirve para copiar el valor de un Registro A a un Registro B, siendo el primero el Registro Destino y, el segundo, el Registro Origen.\\
+	
+	Este comando ocupa 1 byte y tiene un opcode diferente según los Registros implicados.\\
+	
+	\begin{table}[h!]
+		\centering
+		\label{tab:MOV1}
+		\begin{tabular}{c|c||c|c||c|c}
+			Instrucción & Opcode & Instrucción & Opcode & Instrucción & Opcode \\
+			\midrule
+			MOV A,A & 7F & MOV B,A & 47 & MOV C,A & 4F \\
+			MOV A,B & 78 & MOV B,B & 40 & MOV C,B & 48 \\
+			MOV A,C & 79 & MOV B,C & 41 & MOV C,C & 49 \\
+			MOV A,D & 7A & MOV B,D & 42 & MOV C,D & 4A \\
+			MOV A,E & 7B & MOV B,E & 43 & MOV C,E & 4B \\
+			MOV A,H & 7C & MOV B,H & 44 & MOV C,H & 4C \\
+			MOV A,L & 7D & MOV B,L & 45 & MOV C,L & 4D \\
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[h!]
+		\centering
+		\label{tab:MOV2}
+		\begin{tabular}{c|c||c|c||c|c}
+			Instrucción & Opcode & Instrucción & Opcode & Instrucción & Opcode \\
+			\midrule
+			MOV D,A & 57 & MOV E,A & 5F & MOV H,A & 67 \\
+			MOV D,B & 50 & MOV E,B & 58 & MOV H,B & 60 \\
+			MOV D,C & 51 & MOV E,C & 59 & MOV H,C & 61 \\
+			MOV D,D & 52 & MOV E,D & 5A & MOV H,D & 62 \\
+			MOV D,E & 53 & MOV E,E & 5B & MOV H,E & 63 \\
+			MOV D,H & 54 & MOV E,H & 5C & MOV H,H & 64 \\
+			MOV D,L & 55 & MOV E,L & 5D & MOV H,L & 65 \\
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[h!]
+		\flushleft
+		\hspace{0.3cm}
+		\label{tab:MOV3}
+		\begin{tabular}{c|c}
+			Instrucción & Opcode \\
+			\midrule
+			MOV L,A & 57 \\
+			MOV L,B & 50 \\
+			MOV L,B & 50 \\
+			MOV L,B & 50 \\
+			MOV L,B & 50 \\
+			MOV L,B & 50 \\
+			MOV L,B & 50 \\
+		\end{tabular}
+	\end{table}
+	
+	\subsection {Directa}
+	
+	Las operaciones de transferencia directas que existen en 8085 son algo complicadas, así que se dejará para apartados más avanzados.\\
+	
+		\subsection {Indirecta (MOV M)}
+	
+	Las operaciones de transferencia indirectas son aquellas que nos permiten interactuar con la dirección de Memoria a la que apunta el Registro HL.\\
+	
+	//MEQUEDEAQUI//
+	
+\end{document}
+
