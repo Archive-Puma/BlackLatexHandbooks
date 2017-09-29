@@ -26,7 +26,7 @@ Please contact with [Kike Puma](https://linkedin.com/in/kikepuma) if you need mo
 
 All these manuals have been written using LaTeX:
 
-<img src="https://cdn.rawgit.com/CosasDePuma/BlackLatexHandbooks/291a2df0/.img/latex.png" alt="LaTeX" width="310" height="115" align="right">
+<img src="https://cdn.rawgit.com/CosasDePuma/BlackLatexHandbooks/291a2df0/.img/latex.png" alt="LaTeX" width="210" height="64" align="right">
 
 To install full LaTeX on Linux it is necessary to execute the following command:
 
