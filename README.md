@@ -1,4 +1,4 @@
-<img src="https://cdn.rawgit.com/CosasDePuma/BlackLatexHandbooks/291a2df0/.img/handbook.png" alt="LaTeX" width="310" height="115" align="right">
+<img src="https://cdn.rawgit.com/CosasDePuma/BlackLatexHandbooks/87325372/.img/handbook.png" align="right">
 
 # Black LaTeX Handbooks
 :notebook: Clone me!
@@ -22,6 +22,7 @@ Please contact with [Kike Puma](https://linkedin.com/in/kikepuma) if you need mo
 | ES | [Sistemas Digitales](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Sistemas%20Digitales) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
 
 :closed_book: Development
+----
 
 All these manuals have been written using LaTeX:
 
