@@ -11,6 +11,9 @@
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 
+% captions without name
+\usepackage{caption}
+
 % insert graphical tree
 \usepackage{tikz}
 \usepackage{tikz-qtree}
@@ -23,6 +26,9 @@
 
 % use special superindex
 \usepackage{stackrel}
+
+% overline words
+\usepackage{soul}
 
 % set contents to page using [H]
 \usepackage{float}
@@ -160,6 +166,7 @@
 			
 			\begin{table}[H]
 				\centering
+				\label{table:con}
 				\begin{tabular}{c|c|c|c||c|c|c|c}
 					Binario & Octal & Decimal & Hexadec. & Binario & Octal & Decimal & Hexadec. \\
 					\toprule
@@ -215,22 +222,162 @@
 				
 			\subsubsection{De decimal a binario}
 			
-					- \underline{\textbf{Método 1:}} La representación de la parte entera de un número decimal se calcula como sucesivas divisiones entre 2 hasta obtener un coeficiente menor que dos. La solución está formada por los restos de las divisiones en orden inverso al que se han ido generando.\\
+					- \underline{\textbf{Método Teórico:}} La representación de la parte entera de un número decimal se calcula como sucesivas divisiones entre 2 hasta obtener un coeficiente menor que dos. La solución está formada por los restos de las divisiones \underline{en orden inverso al que se han ido generando}.\\
 					
 						\begin{table}[H]
 							\centering
 							\begin{tabular}{cccc}
-							Dividendo & Divisor & Cociente & \textbf{Resto} \\
-							\toprule
-							12 & 2 & 6 & \textbf{0} \\
-							6 & 2 & 3 & \textbf{0} \\
-							3 & 2 & 1 & \textbf{1} \\
-							\midrule
-							1 & 2 & 0 & \textbf{1} \\
+								Dividendo & Divisor & Cociente & \textbf{Resto} \\
+								\toprule
+								12 & 2 & 6 & \textbf{0} \\
+								6 & 2 & 3 & \textbf{0} \\
+								3 & 2 & 1 & \textbf{1} \\
+								\midrule
+								1 & 2 & 0 & \textbf{1} \\
 							\end{tabular}
-							\caption{Doce de decimal a binario}
+							\caption*{12 de decimal a binario}
 						\end{table}
 						
 						Como los restos se leen en el orden inverso al obtenido, $12_{10}$ en decimal es $1100_{2}$ en binario.\\
 						
+						Para determinar la representación de una parte fraccionaria, se realizan multiplicaciones por 2 hasta obtener el número de dígitos deseados o hasta que la parte fraccionaria de la conversión sea cero (exacta).\\
+						
+						La representación en binario de la parte fraccionaria está formada por los valores enteros de los resultados leídos \underline{en el orden en el que se obtienen}.
+						
+						\begin{table}[H]
+							\centering
+							\begin{tabular}{ccc}
+								0,2017 & x 2 = & \textbf{0},4034 \\
+								0,4034 & x 2 = & \textbf{0},8068 \\
+								0,8068 & x 2 = & \textbf{1},6136 \\
+								0,6136 & x 2 = & \textbf{1},2257 \\
+								0,2257 & x 2 = & \textbf{0},4544 \\
+								0,4544 & x 2 = & \textbf{0},9088 \\
+								0,9088 & x 2 = & \textbf{1},8176 \\
+								& \vdots & \\
+							\end{tabular}
+							\caption*{0,2017 de decimal a binario}						 
+						\end{table}
+						
+						\newpage
+
+						Como la parte entera se lee en el orden obtenido, $0.2017_{10}$ en decimal es $0011001_{2}$ en binario con 7 bits de precisión.\\
+						
+						Si lo que queremos es representar un número con parte entera y parte fraccionaria, seguiremos los pasos descritos anteriormente y los uniremos en un mismo número.\\
+						
+						De esta forma:
+						
+						\begin{equation}
+							\notag
+							12,2017_{10} = 1100,0011001_{2}
+						\end{equation}\\
+						
+				- \underline{\textbf{Método práctico:}} Sabiendo los pesos de la base binaria, pondremos (de derecha a izquierda) un 1 en la posición que nos de una cantidad menor o igual al número que estamos buscando y un 0 en el que nos de un valor mayor al deseado.\\
+						
+						\begin{table}[H]
+							\centering
+							\caption*{\underline{90,25 de decimal a binario}}
+							\begin{tabular}{ccccccc|cccc||c}
+								\toprule
+								64 & 32 & 16 & 8 & 4 & 2 & 1 & 0.5 & 0.25 & 0.125 & 0.0625 & Decimal acumulado \\
+								\midrule
+								0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 00,00 \\
+								\textbf{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 64,00 \\
+								\st{1}&\st{\textbf{1}}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{96,00} \\
+								1 & 0 & \textbf{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 80,00 \\
+								1 & 0 & 1 & \textbf{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 88,00 \\
+								\st{1}&\st{0}&\st{1}&\st{1}&\st{\textbf{1}}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{0}&\st{92,00} \\
+								1 & 0 & 1 & 1 & 0 & \textbf{1} & 0 & 0 & 0 & 0 & 0 & 90,00 \\
+								\st{1}&\st{0}&\st{1}&\st{1}&\st{0}&\st{1}&\st{\textbf{1}}&\st{0}&\st{0}&\st{0}&\st{0}&\st{91,00} \\
+								\st{1}&\st{0}&\st{1}&\st{1}&\st{0}&\st{1}&\st{0}&\st{\textbf{1}}&\st{0}&\st{0}&\st{0}&\st{90,50} \\
+								1 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & \textbf{1} & 0 & 0 & \textbf{90,25} \\
+								\bottomrule
+							\end{tabular}
+						\end{table}
+						
+						De esta forma obtenemos que:
+						
+						\begin{equation}
+							\notag
+							90.25_{10} = 1011010,01_{2}
+						\end{equation}
+					
+						\newpage
+						
+			\subsubsection{De decimal a cualquier base}
+			
+				Para ello tendremos que seguir los pasos descritos en el apartado anterior pero cambiando el operando de las multiplicaciones y divisiones. En vez de utilizar un 2, utilizaremos el módulo de nuestra base. Por ejemplo:\\
+				
+				\begin{table}[H]
+					\centering
+					\begin{tabular}{cccl}
+						Dividendo & Divisor & Cociente & \textbf{Resto} \\
+						\toprule
+						2894 & 16 & 180 & \textbf{E} (14)\\
+						180 & 16 & 11 & \textbf{4} \\
+						\midrule
+						11 & 16 & 0 & \textbf{B} (11) \\
+					\end{tabular}
+					\caption*{$2894_{10}$ es lo mismo que $B4E_{16}$}
+				\end{table}
+				
+				Lo mismo ocurre si nos sabemos los pesos, aunque a causa de tener más símbolos que 0 y 1, este método se vuelve inviable:\\
+				
+				\begin{table}[H]
+							\centering
+							\caption*{\underline{545 de decimal a octal}}
+							\begin{tabular}{cccc||c}
+								\toprule
+								512 & 64 & 8 & 1 & Decimal acumulado \\
+								\midrule
+								0 & 0 & 0 & 0 & 000 \\
+								\textbf{1} & 0 & 0 & 0 & 512 \\
+								\st{1}&\st{\textbf{1}}&\st{0}&\st{0}&\st{576} \\
+								\st{1}&\st{0}&\st{\textbf{7}}&\st{0}&\st{568} \\
+								\st{1}&\st{0}&\st{\textbf{6}}&\st{0}&\st{560} \\
+								\st{1}&\st{0}&\st{\textbf{5}}&\st{0}&\st{552} \\
+								1 & 0 & \textbf{4} & 0 & 544\\
+								1 & 0 & 4 & \textbf{1} & \textbf{545}\\
+								\bottomrule
+							\end{tabular}
+							\caption*{$545_{10}$ es equivalente a $1041_8$}
+						\end{table}
+						
+						\newpage
+						
+			\subsection{De binario a octal o hexadecimal}
+				
+				Dado que tanto binario, cuaternario, octal, hexadecimal... son bases que tienen como módulo una potencia de 2, se da entre ellas una propiedad que permite realizar cambios de una manera mucho más cómoda y fluída.\\
+				
+				Por ejemplo, si queremos pasar de binario a octal, deberemos separar desde la coma grupos de 3 dígitos binarios y rellenar aquellos que sobren con ceros.\\
+				
+				Sea el número $10 111 110.1_2$:\\
+				
+				\begin{equation}
+					\notag
+					\underbrace{\textbf{0}10} \underbrace{111} \underbrace{110} ~,~ \underbrace{1\textbf{0}\textbf{0}}
+				\end{equation}\\
+				
+				Posteriormente sustituímos cada grupo de tres dígitos por su equivalente en octal:\\
+				
+				\begin{equation}
+					\notag
+					\underbrace{010}_2 \underbrace{111}_7 \underbrace{110}_6 ~,~ \underbrace{100}_4
+				\end{equation}\\
+				
+				De esta forma, el número $10111110.1_2$ es equivalente a $276.4_8$.\\
+				
+				El que separemos los dígitos en binario de tres en tres se debe a que $8 = 2^3$. En el caso de que queramos pasarlo a hexadecimal ($16 = 2^4$) tendremos que separarlos en grupos de 4 y repetir el proceso:
+				
+				\begin{equation}
+					\notag
+					\underbrace{1011}_B ~ \underbrace{1110}_E ~,~ \underbrace{1000}_8
+				\end{equation}\\
+				
+				De esta forma, el número $10111110.1_2$ es equivalente a $BE,8_{16}$.\\
+				
+				\newpage
+				
+		\section{Aritmética binaria}
+				
 \end{document}	
