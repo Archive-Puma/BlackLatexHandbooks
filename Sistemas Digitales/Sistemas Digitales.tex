@@ -18,12 +18,18 @@
 % no equation numeration
 \usepackage{amsmath}
 
+% use tables
+\usepackage{booktabs}
+
+% use special superindex
+\usepackage{stackrel}
+
 % set contents to page using [H]
 \usepackage{float}
 
 % create the title
 \title{\textbf{Sistemas Digitales}}
-\date{2017-09-26}
+\date{2017-18}
 \author{Diego Enrique Fontán, CosasDePuma}
 
 \begin{document}
@@ -123,21 +129,108 @@
 		
 		\begin{figure}[H]
 			\centering
-			\Tree [.Cantidad  [.3735928559 real ] [., símbolo ] [.129152485 fraccionaria ] ]
+			\Tree [.Cantidad  [.3735928559 entera ] [., símbolo ] [.129152485 fraccionaria ] ]
 		\end{figure}
 		
 		- Cada dígito tiene asociado un \textbf{peso} cuyo valor depende de la \textbf{base} y de la \textbf{posición} que ocupe el dígito.\\
 		
 		\newpage
+			
+		\subsection{Sistemas de numeración}
 		
-		\subsection{Peso numérico según la base y posición}
+			Un sistema de numeración de base \textbf{b} utiliza hasta \textbf{b} símbolo para representar diferentes cantidades.\\
+			
+			La base de un sistema de numeracíon también se denomina \textit{raíz} o \textit{módulo}.\\
+			
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{c|c}
+					Sistema de numeración & Símbolos utilizados\\
+					\midrule
+					Binario (base = 2) & 0, 1\\
+					Ternario (base = 3) & 0, 1, 2\\
+					Octal (base = 8) & 0, 1, 3, 4, 5, 6, 7\\
+					Decimal (base = 10) & 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\\
+					Hexadecimal (base = 16) & 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F\\
+				\end{tabular}
+				\caption{Símbolos usados según el sistema de numeración utilizado}
+			\end{table}
+			
+			Como hemos visto, una misma cantidad se puede representar de diferentes maneras, según la base que utilicemos. La tabla de equivalencias entre los diferentes sistemas de numeración más utilizados sería la siguiente:\\
+			
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{c|c|c|c||c|c|c|c}
+					Binario & Octal & Decimal & Hexadec. & Binario & Octal & Decimal & Hexadec. \\
+					\toprule
+					0000 & 00 & 00 & 0 & 1000 & 10 & 08 & 8 \\
+					0001 & 01 & 01 & 1 & 1001 & 11 & 09 & 9 \\
+					0010 & 02 & 02 & 2 & 1010 & 12 & 10 & A \\
+					0011 & 03 & 03 & 3 & 1011 & 13 & 11 & B \\
+					0100 & 04 & 04 & 4 & 1100 & 14 & 12 & C \\
+					0101 & 05 & 05 & 5 & 1101 & 15 & 13 & D \\
+					0110 & 06 & 06 & 6 &1110 & 16 & 14 & E \\
+					0111 & 07 & 07 & 7 & 1111 & 17 & 15 & F \\
+					\bottomrule					
+				\end{tabular}
+			\end{table}
+			
+			\newpage
+			      
+	\subsection{Peso numérico según la base y posición}
 		
 			Las posiciones y los pesos asociados a cada uno de los dígitos de una cantidad guardan la siguiente relación:
 			
 			\begin{equation}
-			\notag
-			\overbrace{\underbrace{{a}_{n-1}^{{b}^{n-1}}\ {a}_{n-2}^{{b}^{n-2}}\ ...\ {a}_{1}^{b}\ {a}_{0}^{1}}_{parte\ real}\ ,\ \underbrace{{a}_{-1}^{{b}^{-1}}\ {a}_{-2}^{{b}^{-2}}\ ...\ {a}_{-(m-1)}^{{b}^{-(m-1)}}\ {a}_{-m}^{{b}^{-m}}}_{parte\ fraccionaria}}^{pesos}
+				\notag
+				\overbrace{\underbrace{{a}_{n-1}^{{b}^{n-1}}\ {a}_{n-2}^{{b}^{n-2}}\ ...\ {a}_{1}^{b}\ {a}_{0}^{1}}_{parte\ entera}\ ,\ \underbrace{{a}_{-1}^{{b}^{-1}}\ {a}_{-2}^{{b}^{-2}}\ ...\ {a}_{-(m-1)}^{{b}^{-(m-1)}}\ {a}_{-m}^{{b}^{-m}}}_{parte\ fraccionaria}}^{pesos}
+			\end{equation}\\
+			
+			Veamos los pesos asociados a la base decimal:
+			
+			\begin{equation}
+				\notag
+				\stackbin{10000}{{10}^{4}} ~ \stackbin{1000}{{10}^{3}} ~ \stackbin{100}{{10}^{2}} ~ \stackbin{10}{{10}^{1}} ~ \stackbin{1}{{10}^{0}} ~ \stackbin{0.1}{{10}^{-1}} ~ \stackbin{0.01}{{10}^{-2}} ~ \stackbin{0.001}{{10}^{-3}} ~ \stackbin{0.0001}{{10}^{-4}}
+			\end{equation}\\
+			
+			También es importante poder identificar rápidamente los pesos asociados a la base binaria:\\
+			
+			\begin{equation}
+				\notag
+				\stackbin{256}{{2}^{8}} ~ \stackbin{128}{{2}^{7}} ~ \stackbin{64}{{2}^{6}} ~ \stackbin{32}{{2}^{5}} ~ \stackbin{16}{{2}^{4}} ~ \stackbin{8}{{2}^{3}} ~ \stackbin{4}{{2}^{2}} ~ \stackbin{2}{{2}^{1}} ~ \stackbin{1}{{2}^{0}} ~ \stackbin{0.5}{{2}^{-1}} ~ \stackbin{0.25}{{2}^{-2}} ~ \stackbin{0.125}{{2}^{-3}} ~ \stackbin{0.0625}{{2}^{-4}}
 			\end{equation}
-        
-	
-\end{document}
+			
+		\subsection{Conversión entre bases}
+		
+			\subsubsection{A base decimal}
+		
+				Para pasar una cantidad \underline{en una base cualquiera a base decimal}, se utiliza la fórmula determinada como \textbf{polinomio característico}:\\
+			
+				\begin{equation}
+					\notag
+					{N}_{b} = \sum_{i=-m}^{i=n-1}{a}_{i}{b}^{i} = \underbrace{{a}_{n-1}{b}^{n-1} + ... + {a}_{1}{b}^{1} + {a}_{0}{b}^{0}}_{parte\ entera} + \underbrace{{a}_{-1}{b}^{-1} + {a}_{-2}{b}^{-2} + ... + {a}_{-m}{b}^{-m}}_{parte\ fraccionaria}
+				\end{equation}
+			
+				\newpage
+				
+			\subsubsection{De decimal a binario}
+			
+					- \underline{\textbf{Método 1:}} La representación de la parte entera de un número decimal se calcula como sucesivas divisiones entre 2 hasta obtener un coeficiente menor que dos. La solución está formada por los restos de las divisiones en orden inverso al que se han ido generando.\\
+					
+						\begin{table}[H]
+							\centering
+							\begin{tabular}{cccc}
+							Dividendo & Divisor & Cociente & \textbf{Resto} \\
+							\toprule
+							12 & 2 & 6 & \textbf{0} \\
+							6 & 2 & 3 & \textbf{0} \\
+							3 & 2 & 1 & \textbf{1} \\
+							\midrule
+							1 & 2 & 0 & \textbf{1} \\
+							\end{tabular}
+							\caption{Doce de decimal a binario}
+						\end{table}
+						
+						Como los restos se leen en el orden inverso al obtenido, $12_{10}$ en decimal es $1100_{2}$ en binario.\\
+						
+\end{document}	
