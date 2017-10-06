@@ -1,0 +1,123 @@
+% set the document type and the font size
+\documentclass[spanish, 12pt]{article}
+
+% use Spanish package
+\usepackage[spanish]{babel}
+
+% captions without name
+\usepackage{caption}
+
+% set UTF-8 codification
+\usepackage[utf8]{inputenc}
+
+% set contents to page using [H]
+\usepackage{float}
+
+% insert graphical tree
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+% no equation numeration
+\usepackage{amsmath}
+
+% graphs with arrows
+\usepackage[all]{xy}
+
+% centering xy graphs
+\usepackage{calc}
+
+\title{Sistemas Operativos}
+\author{Diego Enrique Fontán}
+\date{2017-18}
+
+
+\begin{document}
+
+	\pagenumbering{gobble}
+	\maketitle
+	\newpage
+	
+	\tableofcontents
+	\newpage
+	
+	\pagenumbering{arabic}
+	
+	\section{Niveles de software}
+	
+	\vfill
+	
+		Se denomina \textbf{soporte lógico} o \textbf{software} a todo aquel conjunto de programas asociados a un ordenador.\\
+		
+		\begin{figure}[H]
+			\centering
+			\Tree [.Software Aplicaciones Utilidades Control ]
+			\caption*{\textit{Niveles de software}}
+		\end{figure}
+		
+		\subsection{Concepto de Sistema Operativo}
+		
+			Un \textbf{Sistema Operativo} es un programa (o conjunto de subprogramas o módulos) de \underline{control} que tiene como finalidad facilitar el uso del ordenador y conseguir que se utilice eficientemente.\\
+			
+			\subsubsection{Características del Sistema Operativo}
+			
+				- Actúa como interfaz entre el usuario y la máquina física.\\
+			
+				- Controla la ejecución de otros programas.\\
+				
+				- Gestiona y mantiene ficheros.\\
+			
+				- Contabiliza la utilización de los recursos.\\
+			
+				- Protege los datos y los programas.\\
+			
+				- Gestiona y asigna directamente los recursos hardware.
+				
+				\begin{equation}
+					\notag
+					\vdots
+				\end{equation}
+				
+				\newpage
+		
+			\subsubsection{Funciones principales del Sistema Operativo}
+		
+				El Sistema Operativo debe inicializar la máquina y preparar el ordenador para su funcionamiento mediante una \textbf{inicialización total} (Initial Program Loading, Bootstrapping) o mediante una \textbf{inicialización parcial}.\\
+				
+				También servirá de \textbf{máquina extendida o virtual} con el fin de ocultar los detalles del hardware al usuario y proporcionar un entorno más cómodo. De esta forma se logran varios objetivos:\\
+				
+				- Evitar que la ejecución de los programas se interfieran unos entre otros, proporcionando así \textbf{seguridad}.\\
+				
+				- Construir recursos virtuales de alto nivel a partir de recursos físicos de de más bajo nivel.\\
+				
+				Otra de las funciones principales de un Sistema Operativo es la de \textbf{administrar los recursos para su funcionamiento}, ya sea \textit{asignandole} todos los que requiera un programa para su ejecución o \textit{controlando} el uso corrector de estos.\\
+				
+				Además, es importante que un Sistema Operativo sea \textbf{determinista}, para que un mismo programa ejecutado con los mismo datos de los mismos resultados en cualquier momento y en cualquier ejecución, y que sea \textbf{indeterminista}, para que pueda responder a circunstancias que ocurren de manera impredecible.
+				
+				\newpage
+				
+	\section{Tipos de Sistemas}
+	
+		\subsection{Sistemas monolíticos}
+		
+			No tienen una estructrura definida. Se componen de un conjunto de procedimientos donde cada uno de ellos puede llamar a todos los demás.\\
+		
+			\centerline{\xymatrix{\\
+			& & \bigcirc \ar[d] \ar@/^/[dr] \ar@/_/[dl] &  & \\
+			& \bigcirc \ar@/_/[dl] \ar[d] & \bigcirc \ar@/^/[l] \ar@/^/[dr] & \bigcirc \ar[d] \ar@/^/[dr] &   \\
+			\bigcirc \ar@/_/[r] & \bigcirc \ar@/_/[l] & \dots & \bigcirc & \bigcirc
+			}}
+			
+			\hfill \break
+						
+		\subsection{Sistemas en estratos}
+		
+			Se organiza en una jerarquía de estratos, estando construído cada uno de ellos sobre el otro que tiene menor jerarquía que él.\\
+			
+			\centerline{\xymatrix{
+				Operador~del~Sistema~Operativo \\
+			 	Programas~de~usuario \\
+			 	a
+			 	}}
+	
+
+\end{document}
