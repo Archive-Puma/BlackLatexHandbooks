@@ -33,6 +33,9 @@
 % set contents to page using [H]
 \usepackage{float}
 
+% create schemas
+\usepackage{schemata}
+
 % create the title
 \title{\textbf{Sistemas Digitales}}
 \date{2017-18}
@@ -377,7 +380,97 @@
 				De esta forma, el número $10111110.1_2$ es equivalente a $BE,8_{16}$.\\
 				
 				\newpage
+			
+		\section{Sistema binario}
+		
+		El sistema de numeración binario solamente usa dos símbolos (0 y 1) para representar cantidades. Es por esta característica por la cual se aplica a sistemas digitales y biestables.\\
+		
+		El sistema binario también tiene una aritmética propia, muy similar a la aritmética decimal, lo que lo convierte en el sistema predilecto con el que trabaja la electrónica.\\
+		
+		Además de la aritmética básica, para solucionar ciertos problemas, también se utilizan códigos y convenios, los cuales aparecerán en apartados posteriores.
+		
+		\vfill
+			
+			\subsection{Aritmética binaria}
+		
+			La aritmética binaria es practicamente similar a la aritmética decimal.\\
+		
+			A grandes rasgos, se podría resumir en cuatro grandes grupos, según la operación aritmética elemental, como:\\
+		
+				\subsubsection{Suma binaria}
+			
+					La suma binaria se basa en la suma con acarreo.\\
 				
-		\section{Aritmética binaria}
+					\begin{table}[H]
+						\centering
+						\begin{tabular}{ccccc||c}
+							 &  &  &  &  & Acarreo \\
+							\midrule
+							0 & + & 0 & = & 0 & 0 \\
+							0 & + & 1 & = & 1 & 0 \\
+							1 & + & 0 & = & 1 & 0 \\
+							\textbf{1} & + & \textbf{1} & = & \textbf{0} & \textbf{1} \\
+						\end{tabular}
+					\end{table}
+					
+					\newpage
+				
+				\subsubsection{Resta binaria}
+			
+					La resta binaria se basa en la resta con acarreo.\\
+				
+					\begin{table}[H]
+						\centering
+						\begin{tabular}{ccccc||c}
+							 &  &  &  &  & Acarreo \\
+							\midrule
+							0 & - & 0 & = & 0 & 0 \\
+							1 & - & 1 & = & 0 & 0 \\
+							1 & - & 0 & = & 1 & 0 \\
+							\textbf{0} & - & \textbf{1} & = & \textbf{1} & \textbf{1} \\
+						\end{tabular}
+					\end{table}
+				
+				\subsubsection{Multiplicación binaria}
+			
+					La multiplicación binaria se basa en la multiplicación aditiva. Cualquier número por 0 da como resultado 0 y cualquier cantidad por 1 da la cantidad original.\\
+				
+					\begin{table}[H]
+						\centering
+						\begin{tabular}{cccccccc}
+							&   &   & 1 & 0 & 1 & 1 & 0 \\
+						  x &   &   &   &   & 1 & 1 & 0 \\
+							\toprule
+							&   &   & 0 & 0 & 0 & 0 & 0 \\
+							&   & 1 & 0 & 1 & 1 & 0 &   \\
+							${}_{1}$ & ${1}_{1}$ & ${0}_{1}$ & ${1}_{1}$ & 1 & 0 &   &   \\
+							\midrule
+							1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+						\end{tabular}
+					\end{table}
+				
+				\subsubsection{División binaria}
+			
+					La división binaria la haremos por el método de \textit{"las cajitas"}.\\
+				
+					\begin{table}[H]
+						\centering
+						\begin{tabular}{cccc|ccc}
+							1 & 1 & 0 & 0 & 1 & 0 &   \\
+							\toprule
+							  & 1 & 0 &   & 1 & 1 & 0 \\
+							  &   & 0 & 0 \\
+							  &   &   & $\underbrace{0}$ \\
+						\end{tabular}
+					\end{table}
+					
+					\newpage
+				
+			\subsection{Formatos, convenios y códigos}
+			
+				Hasta el momento, los números binarios con los que podamos trabajar sólamente expresan cantidades positivas y, para cierto número de bits, sólamente podemos representar una limitada cantidad de números.\\
+				
+				Para solucionar esto, se crearon formatos y convenios, que se pueden calificar en:\\
+			
 				
 \end{document}	
