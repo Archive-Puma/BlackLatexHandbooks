@@ -20,6 +20,7 @@ Please contact with [Kike Puma](https://linkedin.com/in/kikepuma) if you need mo
 | --- | --- | --- | --- | --- |
 | ES | [Programación en ASM: 8085](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Programacion%20en%20ASM:%208085) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
 | ES | [Sistemas Digitales](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Sistemas%20Digitales) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
+| ES | [Sistemas Operativos](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Sistemas%20Operativos) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
 
 :closed_book: Development
 ----
