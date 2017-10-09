@@ -26,8 +26,11 @@
 % centering xy graphs
 \usepackage{calc}
 
+% cool boxes
+\usepackage{fancybox}
+
 \title{Sistemas Operativos}
-\author{Diego Enrique Fontán}
+\author{Diego Enrique Fontán, CosasDePuma}
 \date{2017-18}
 
 
@@ -97,6 +100,8 @@
 				
 	\section{Tipos de Sistemas}
 	
+	\vfill
+	
 		\subsection{Sistemas monolíticos}
 		
 			No tienen una estructrura definida. Se componen de un conjunto de procedimientos donde cada uno de ellos puede llamar a todos los demás.\\
@@ -113,11 +118,70 @@
 		
 			Se organiza en una jerarquía de estratos, estando construído cada uno de ellos sobre el otro que tiene menor jerarquía que él.\\
 			
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{|c|}
+				Operador del SO \\
+				Programas de usuario \\
+				Administración de E/S \\
+				Comunicación operador-procesos \\
+				Administración de memoria y tambor \\
+				Distribución del procesador y multiprogramación \\
+				\end{tabular}
+				\caption*{\textit{Ejemplo de sistema THE}}
+			\end{table}
+			
+			\newpage
+			
+		\subsection{Máquinas virtuales}
+		
+			Máquinas similares a la máquina real pero de carácter virtual.
+			
+			El programa de control se ejecuta sobre el propio hardware y ofreec al nivel superior varias máquinas virtuales.
+			
+			\centerline{\xymatrix{\\
+				\fbox{SO 1} \ar@/^/[d] & \fbox{SO 2} \ar@/^/[d] & \fbox{SO 3} \ar@/^/[d] \\
+				\fbox{MV 1} \ar@/^/[u] & \fbox{MV 2} \ar@/^/[u] & \fbox{MV 3} \ar@/^/[u] \\
+			}}
 			\centerline{\xymatrix{
-				Operador~del~Sistema~Operativo \\
-			 	Programas~de~usuario \\
-			 	a
-			 	}}
+				\fbox{ Monitor de máquinas virtuales } \\
+			}}
+			\centerline{\xymatrix{
+				\doublebox{ Hardware } \\
+			}}
+			
+		\subsection{Modelo Cliente-Servidor}
+		
+			Su objetivo es minimizar el kernel desplazando el código de todos sus servicios a estratos lo más superiores posibles.\\
+			
+			Para ello, la mayoría de sus funciones se implementan como procesos del servidor, denominados \textbf{procesos servidores}, de forma que cuando un proceso de usuario, llamado \textbf{proceso cliente}, necesita un servicio del SO, lo que hace es enviar un mensaje al servidor correspondiente (el cual realiza el trabajo y devuelve la respuesta).\\
+			
+			\begin{figure}[H]
+				\centerline{\doublebox{\fbox{Cliente 1} \break \fbox{Servidor de ficheros} \break \fbox{Servidor de la memoria} \break \fbox{Cliente 2} \\[4mm] Kernel}}
+			\end{figure}
+			
+			El kernel. lo único que hace es implementar la comunicación entre cliente-servidor y entre servidor-hardware.\\
+			
+			\newpage
+			
+		\subsection{Estructura orientada al objeto}
 	
-
+			Se basan en una colección de objetos, donde las funciones del sistema son ficheros, dispositivos, etc.\\
+			
+			La interacción entre dichos objetos viene determinada por las capacidades que cada uno tenga para actuar con el otro.\\
+			
+			El kerner es el responsable del mantenimiento de las definiciones de los tipos de objetos soportados y del control de los privilegios de acceso de los mismos.\\
+			
+			\centerline{\xymatrix{
+				\ovalbox{Gestión de memoria} \ar@/_/[dr] & & \ovalbox{Gestión de E/S}\ar@/^/[dl] \\
+				& \Ovalbox{ Gestión de Objetos } \ar@/_/[dl] \ar[d] \ar@/^/[dr] & \\
+				\textit{\fbox{Procesos}} & \fbox{\textit{Ficheros}} & \fbox{\textit{Dispositivos}} \\
+			}}
+			
+		\subsection{Sistemas híbridos}
+		
+			Son similares a los sistemas cliente-servidor, aunque añaden ciertas funcionalidades al kernel para que se ejecute más rápido que si permanecen en el espacio de usuario.\\
+			
+			Se les llama híbridos porque usan mecanismos o conceptos de arquitectura de los sistemas monolíticos y de los sistemas cliente-servidor.\\
+			
 \end{document}
