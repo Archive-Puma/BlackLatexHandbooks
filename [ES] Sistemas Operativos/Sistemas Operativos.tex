@@ -7,6 +7,10 @@
 % captions without name
 \usepackage{caption}
 
+% insert images
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
 % set UTF-8 codification
 \usepackage[utf8]{inputenc}
 
@@ -184,4 +188,121 @@
 			
 			Se les llama híbridos porque usan mecanismos o conceptos de arquitectura de los sistemas monolíticos y de los sistemas cliente-servidor.\\
 			
+			\newpage
+			
+	\section{Procesos}
+	
+		\vfill
+		
+		\subsection{Definiciones básicas}
+			
+			\textbf{Multiprogramación:} Característica que permite que más de un programa resida en la memoria principal al mismo tiempo.\\
+			
+			Al número de programas almacenados simultáneamente en memoria en un momento dado se denomina \underline{grado de multiprogramación}.\\
+			
+			\textbf{Programa:} Secuencia de instrucciones o acciones definidas mediante un lenguaje de programación y que pueden ser ejecutadas por parte de un procesador.\\
+			
+			\textbf{Proceso:} Secuencia de acciones derivadas de la ejecución de una serie de instrucciones definidas a priori.\\
+			
+			Destacar que un proceso puede requqerir la ejecución de uno o varios programas y, por contrapartida, un programa puede formar parte de más de un proceso.\\
+			
+			Un programa siempre es el mismo, es decir, es una \underline{entidad estática y pasiva}, pero un proceso puede variar bastante según esté el sistema en cada momento (\underline{entidad dinámica y activa}).\\
+			
+			El programa o programas asociados a un proceso no tienen porqué estar implementados en el software.\\
+			
+			\newpage
+			
+			\textbf{Procesador:} Agente que lleva a cabo un proceso que ejecuta un programa asociado.\\
+			
+			\textbf{Concurrencia:} Solapamiento en el tiempo de la ejecución de varias actividades.\\
+			
+			\textbf{Contexto o entorno volátil:} Estado actual de un proceso (valor de registros de la CPU, memoria asignada a procesos, etc.).\\
+			
+			\textbf{Conmutación de la CPU:} Pérdida del control de la CPU por parte de un proceso para que ésta se le asigne a otro proceso.\\
+			
+			Esto implica \underline{guardar el entorno volátil} del proceso que pierde la CPU y \underline{restaurar el contexto} del proceso al que se le asigna.\\
+			
+			\textbf{Overhed, sobrecarga o carga adicional:} Tiempo de CPU empleado en la ejecución de los procesos del sistema.\\
+			
+			\textbf{Procesamiento Concurrente:} Situación obtenida al hacer una instantánea del sistema. En este caso encontraremos varios procesos que se encuentran en un estado intermedio entre su estado inicial y final.\\
+			
+			\textbf{Programación Concurrente:} Conjunto de notaciones que se usan para expresar paralelismo y conjunto de técnicas que se usan para resolver posibles conflictos entre procesos. 
+			
+			\newpage
+			
+		\subsection{Concurrencia. Programa Concurrente}
+		
+			Dos procesos, P1 y P2, se ejecutan concurrentemente si la primera instrucción de P1 se ejecuta entre la primera y la última instrucción de P2.\\
+			
+			\subsubsection{Tipos de concurrencia}
+			
+				Si el número de procesadores es mayor o igual al número de procesos, entonces se da concurrencia real, también llamada paralelismo.\\
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.63]{real}
+					\caption{Real o paralela}
+				\end{figure}
+			
+				Si el número de procesadores es menor al número de procesos, entonces se da concurrencia aparente o simulada, también llamada pseudoparalelismo.\\
+			
+				\begin{figure}[H]
+					\centering
+					\includegraphics[scale=0.63]{llike}
+					\caption{Aparente, simulada o pseudoparalela}
+				\end{figure}
+				
+				\newpage
+				
+		\subsection{Comunicación entre procesos}
+		
+			Los procesos de un sistema no actúan de forma aislada.\\
+			
+			A veces tiene que \underline{cooperar} para alcanzar un objetivo común. A este tipo de comunicación se le llama \textbf{sincronización}.\\
+			
+			Por contrapartida, a veces tienen que \underline{competir} por el uso de recursos. Esto es lo que se denomina \textbf{exclusión mutua}.\\
+			
+			\subsubsection{Exclusión mutua}
+			
+				Los tipos de recursos que existen en exclusión mutua son:\\
+			
+				- \textbf{Compartibles:} Pueden ser usados por varios procesos de forma concurrente.\\
+			
+				- \textbf{No compartibles:} Su uso está restringido a un sólo proceso a la vez hasta que el proceso que está usando dicho recurso finaliza su utilización.\\
+			
+				Es por ello que la exclusión mutua se da cuando dos o más procesos se están ejecutando en paralelo y necesitan a la vez el uso de un recurso no compartible.\\
+			
+				En este caso, el recurso no compartible se le asigna sólamente a un proceso y el resto queda en espera hasta que el primero finalice de usarlo. Cuando esto ocurra, el recurso será asignado a uno de los procesos en espera. Con ello se asegura \textit{el correcto uso del recurso}.\\
+			
+				El trozo de código donde un proceso hace uso de un recurso no compartible se denomina \textbf{sección crítica o región crítica} y deben ser ejecutadas lo más rápido posible y cuidadosamente codificadas.\\
+				
+				\newpage
+				
+				\subsubsection{Sincronización}
+				
+					La sincronización es la comunicación requerida entre dos o más procesos con el fin de sincronizar sus actividades.\\
+				
+					Existen dos tipos de sincronización generales:\\
+					
+					- \textbf{Sincronización simple:} Un proceso, P1, llegado a cierto punto clave, no puede proseguir con su ejecución, hasta que otro proceso, P2, haya llegado a otro punto clave de ejecución.\\
+					
+					\begin{figure}[H]
+					\centerline{\xymatrix{
+						P1 \ar@/_/[dr] & & P1 \\
+						P2 \ar[r] & \oslash \ar@/_/[ur] \ar[r] & P2 \\
+					}}
+					\end{figure}
+					
+					- \textbf{Sincronización múltiple:} Un proceso, P1, llegado a cierto punto clave de su ejecución no puede proseguir hasta que otro proceso, P2, no haya llegado a dicho punto, y viceversa.\\
+					
+					\begin{figure}[H]
+					\centerline{\xymatrix{
+						P1 \ar@/_/[dr] & & P1 \\
+						& \oslash \ar@/_/[ur] \ar@/^/[dr]& \\
+						P2 \ar@/^/[ur] & & P2 \\
+					}}
+					\end{figure}
+			
+					\newpage
+					
 \end{document}
