@@ -278,31 +278,73 @@
 				
 				\newpage
 				
-				\subsubsection{Sincronización}
+			\subsubsection{Sincronización}
 				
-					La sincronización es la comunicación requerida entre dos o más procesos con el fin de sincronizar sus actividades.\\
+				La sincronización es la comunicación requerida entre dos o más procesos con el fin de sincronizar sus actividades.\\
 				
-					Existen dos tipos de sincronización generales:\\
+				Existen dos tipos de sincronización generales:\\
 					
-					- \textbf{Sincronización simple:} Un proceso, P1, llegado a cierto punto clave, no puede proseguir con su ejecución, hasta que otro proceso, P2, haya llegado a otro punto clave de ejecución.\\
+				- \textbf{Sincronización simple:} Un proceso, P1, llegado a cierto punto clave, no puede proseguir con su ejecución, hasta que otro proceso, P2, haya llegado a otro punto clave de ejecución.\\
 					
-					\begin{figure}[H]
+				\begin{figure}[H]
 					\centerline{\xymatrix{
 						P1 \ar@/_/[dr] & & P1 \\
 						P2 \ar[r] & \oslash \ar@/_/[ur] \ar[r] & P2 \\
 					}}
-					\end{figure}
+				\end{figure}
 					
-					- \textbf{Sincronización múltiple:} Un proceso, P1, llegado a cierto punto clave de su ejecución no puede proseguir hasta que otro proceso, P2, no haya llegado a dicho punto, y viceversa.\\
+				- \textbf{Sincronización múltiple:} Un proceso, P1, llegado a cierto punto clave de su ejecución no puede proseguir hasta que otro proceso, P2, no haya llegado a dicho punto, y viceversa.\\
 					
-					\begin{figure}[H]
+				\begin{figure}[H]
 					\centerline{\xymatrix{
 						P1 \ar@/_/[dr] & & P1 \\
 						& \oslash \ar@/_/[ur] \ar@/^/[dr]& \\
 						P2 \ar@/^/[ur] & & P2 \\
 					}}
-					\end{figure}
+				\end{figure}
 			
-					\newpage
+				\newpage
 					
+		\subsection{Interbloqueos o Deadlocks}
+		
+			Un proceso está \textbf{interbloqueado} si está esperando por un evento determinado que nunca va a ocurrir.\\
+		
+			Un conjunto de procesos está \textbf{interbloqueado} cuando cada uno de ellos está esperando un suceso que sólo puede ser causado por otro proceso del mismo conjunto y que nunca se producirá porque están bloqueados.\\
+		
+			\begin{figure}[H]
+				\centerline{\xymatrix{
+				& \fbox{Recurso~NC~1} \ar@/_/[ld] & \\
+				\ovalbox{Proceso~A} \ar@{-->}@/_/[dr] & \bigotimes & \ovalbox{Proceso~B} \ar@{-->}@/_/[ul] \\
+				& \fbox{Recurso~NC~2} \ar@/_/[ru] & \\
+			}}
+				\caption*{Interbloque entre dos procesos por el uso de recursos no compartibles}
+			\end{figure}
+		
+			Un proceso está \textbf{postergado indefinidamente} cuando espera por un evento que puede ocurrir pero no se sabe cuando.\\
+		
+			Un proceso puede quedar esperando indefinidamente si no puede proseguir su ejecución debido al continuo procesamiento de otro proceso por parte del Sistema Operativo.\\
+		
+			\subsubsection{Condiciones necesarias para el interbloqueo}
+			
+				- \textbf{Exclusión mutua:} Los procesos reclaman control excesivo de los recursos que piden.\\
+				
+				- \textbf{Esperar por:} Los procesos mantienen los recursos que ya les han asignado mientras esperan por recursos adicionales.\\
+				
+				-\textbf{No apropiatividad:} Los recursos no pueden ser extraídos de los procesos que los mantienen hasta su completa utilización.\\
+				
+				- \textbf{Espera circular:} Existe una cadena circular de procesos en la cual uno de ellos mantiene uno o más recursos que son requeridos por el siguiente proceso de la cadena.\\
+				
+			\subsubsection{Prevención del interbloqueo}
+			
+				Para prevenir el interbloqueo, podemos realizar tres acciones:\\
+			
+				- \textbf{Negar la condición de \textit{esperar por}:} Cada proceso debe pedir todos los recursos que va a necesitar de golpe. Si el conjunto de todos ellos está disponible, se le asigna todos. En caso contrario, no se le asigna a ningún proceso y tendrá que esperar hasta que todos estén disponibles.\\
+				
+				- \textbf{Negar la condición de \textit{no apropiatividad}:} Cuando un proceso que tiene recursos le es negada una petición de recursos adicionales, deberá liberar sus recursos y, si es necesario, pedirlos de nuevo junto a los recursos adicionales.\\
+				
+				- \textbf{Negar la condición de \textit{espera circular}:} Cuando se intala un recurso, se le asigna un número exclusivo, de forma que los procesos deben solicitar los recursos en orden ascendente.\\
+				
+				Con esto podemos prevenirlo \textbf{evitando} el interbloqueo condicionando al sistema para que esquive determinadas situaciones propensas a ello, \textbf{detectando} y determinando si existe o no dicho interbloqueo identificando qué procesos y recursos están implicados en él o \textbf{recuperarnos} de uno retirando uno o más condiciones necesarias.\\
+											
+							
 \end{document}
