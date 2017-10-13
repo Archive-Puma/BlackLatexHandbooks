@@ -21,6 +21,8 @@ Please contact with [Kike Puma](https://linkedin.com/in/kikepuma) if you need mo
 | ES | [Programación en ASM: 8085](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Programacion%20en%20ASM:%208085) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
 | ES | [Sistemas Digitales](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Sistemas%20Digitales) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
 | ES | [Sistemas Operativos](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BES%5D%20Sistemas%20Operativos) | [CosasDePuma](https://github.com/CosasDePuma/) | 2017-18 | In development |
+| EN | [Symbols (The Great, Big List of LATEX Symbols)](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BEN%5D%20Third-Party%20LaTeX%20Manuals) | [D. Carlisle, S. Parkin, A. Holt](https://www.rpi.edu/) | 2001 | Finished |
+| ?? | [Arrows (ElpaqueteXY-pic)](https://github.com/CosasDePuma/BlackLatexHandbooks/tree/master/%5BEN%5D%20Third-Party%20LaTeX%20Manuals) | [Carlos Ivorra](https://www.uv.es/ivorra) | 20?? | Finished |
 
 :closed_book: Development
 ----
