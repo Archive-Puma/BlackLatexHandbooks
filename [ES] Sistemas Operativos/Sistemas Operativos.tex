@@ -345,6 +345,83 @@
 				- \textbf{Negar la condición de \textit{espera circular}:} Cuando se intala un recurso, se le asigna un número exclusivo, de forma que los procesos deben solicitar los recursos en orden ascendente.\\
 				
 				Con esto podemos prevenirlo \textbf{evitando} el interbloqueo condicionando al sistema para que esquive determinadas situaciones propensas a ello, \textbf{detectando} y determinando si existe o no dicho interbloqueo identificando qué procesos y recursos están implicados en él o \textbf{recuperarnos} de uno retirando uno o más condiciones necesarias.\\
+				
+		\newpage
+				
+		\subsection{Estados de un proceso}
+			
+			\vfill
+			
+			\begin{figure}[H]
+				\centerline{\xymatrix{
+				Se~crea~el~proceso \ar@{-->}@/_/[ddr] & & Se~termina~el~proceso \\
+				\\
+				asignacion~de~la~CPU & \ovalbox{ ACTIVO } \ar@/^/[dr] \ar@/_/@{-->}[uur] & esperar~evento \\
+		\ovalbox{ LISTO } \ar@/^/[ur] & & \ovalbox{ BLOQUEADO } \ar@/^/[ll] \\
+				& ocurre~el~evento & \\
+				\\
+				}}
+			\end{figure}	
 											
-							
+			Un proceso está \textbf{activo} cuando tiene el control de un procesador.\\
+			
+			Un proceso está \textbf{bloqueado} cuando está esperando a que ocurra un evento.\\
+			
+			Un proceso está \textbf{listo} cuando está esperando para usar un procesador.\\
+			
+			\newpage
+			
+			\subsubsection{Bloque de Control de Procesos (PCB)}
+			
+				El Bloque de Control de Procesos o PCB es una estructura de datos que contiene toda la información de un proceso que el Sistema Operativo necesita para su control.\\
+			
+			Guarda 	parámetros de estado volátil, como el estado actual, identificación, punteros a memoria, punteros de recursos, etc.\\
+			
+		\subsubsection{Bloque de Control del Sistema (SCB)}
+		
+			El Bloque de Control del Sistema o SCB es una estructura de datos que gestiona el Sistema Operativo para controlar todos los PCB's de los procesos. Reside en memoria principal por su alta frecuencia de consulta.\\
+			
+			Guarda parámetros como la lista de PCB's, punteros a los PCB's activos, puntero a la lista de procesos listos, puntero a la lista de procesos bloqueados, etc.
+		\subsubsection{Operaciones básicas sobre procesos}
+		
+			- \textbf{Crear un proceso}: dar nombre al proceso, insertarlo en la lista de procesos en estado listo, determinar su prioridad inicial, crear el PCB del proceso y asignarles los recursos iniciales del proceso.\\
+			
+			- \textbf{Destruir un proceso}: devolver al sistema los recursos que tiene asignado, eliminarlo de todas las listas del sistema y borrar su PCB.\\
+			
+			- \textbf{Cambiar la prioridad de un proceso}.\\
+			
+			- \textbf{Bloquear un proceso}.\\
+			
+			- \textbf{Despertar un proceso}.\\
+			
+			- \textbf{Despachar un proceso}.\\
+			
+			\newpage
+			
+	\section{El núcleo del Sistema Operativo. El kernel}
+	
+		\vfill
+			
+		El kernel se ejecuta con las interrupciones desactivadas (\textbf{modo privilegiado}) y es la parte del Sistema Operativo más cercana al hardware, por ello suele estar codificado en ensamblador o en lenguaje máquina y reside en la memoria principal.\\
+		
+		\subsection{Funciones básicas del kernel}
+		
+			a) Manipulación de interrupciones.\\
+			
+			b) Inhabilitación y habilitación de interrupciones.\\
+			
+			c) Creación y destrucción de procesos.\\
+			
+			d) Cambio de estado de un proceso.\\
+			
+			e) Despachar un proceso.\\
+			
+			f) Comunicación entre procesos.\\
+			
+			g) Manipulación de los PCB's.\\
+			
+			h) Soporte para servicios de más alto nivel.\\
+			
+			\newpage
+			
 \end{document}
