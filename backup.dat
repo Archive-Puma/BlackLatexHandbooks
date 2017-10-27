@@ -1,3 +1,0 @@
-true
-MVI  A,22H
-HLT
