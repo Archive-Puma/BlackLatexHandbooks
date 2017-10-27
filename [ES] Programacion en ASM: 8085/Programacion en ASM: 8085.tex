@@ -13,6 +13,17 @@
 % set contents to page using [H]
 \usepackage{float}
 
+% source codes
+\usepackage{listings}
+\lstdefinelanguage
+	{8085}     % add a "8085" dialect of Assembler
+   	[]{} 	   % no base dialect
+   	{morekeywords={ORG,BEGIN,DB,MVI,MOV,CMP,LXI,ADD,ADI,JNZ,JZ,JM,JNM,DCR,INR,INX,HLT,SUI,SUB,CPI}}
+
+% flow charts
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows}
+
 % create the title
 \title{\textbf{Programación en ASM: 8085}}
 \date{2017-09-24}
@@ -360,6 +371,67 @@
 						DCR L & 2D \\
 					\end{tabular}
 				\end{table}
+				
+	\newpage
 	
+	\section{Ejemplos de código}
+	
+		\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=white!30]
+		\tikzstyle{init} = [rectangle, draw=black, fill=white!20, text width=5em, text centered, minimum height=4em]
+		\tikzstyle{io} = [trapezium, draw=black, fill=white!20, text width=3em, text centered, minimum height=2em]
+		\tikzstyle{decision} = [diamond, draw=black, fill=white!30, text width=5em, text badly centered, node distance=3cm, inner sep=0pt]
+		\tikzstyle{arrow} = [draw, -latex']
+	
+		\subsection{Máscaras}
+		
+			\textbf{Enunciado:} A partir de la posición de memoria 0E300h, cada uno de los 25 bytes siguientes representa la información de un alumno en una determinada materia.  Cada byte contiene la siguiente información:\\
+			
+			- El bit de mayor peso, b7, indica si es primera matrícula o no.
+			
+			- Los siguientes dos bits, b6 y b5, representan el  curso más alto en el que está matriculado (00 = 1º, 01 = 2º,  10 = 3º y 11 = 4º).
+			
+			- Los 5 bits de menor peso (b4, b3, b2, b1 y b0) representan el valor numérico entero de su nota en la materia (de 0 a 10).\\
+			
+			\textbf{Ejercicio:} cuente el número de 
+alumnos en primera matricula, cuyo curso sea 3º o inferior y tengan una 
+nota igual a 5.\\
+			
+			\textbf{Código:}\\
+			
+			\lstset{language=8085, breaklines=true, basicstyle=\footnotesize}
+			\begin{lstlisting}[frame=single]
+# ORG E000
+# BEGIN E000
+
+; requisitos del alumno
+MASCARA: MVI B, C5H
+
+; lugar en memoria de los alumnos
+INICIO:	   MVI D,05
+   LXI H,FC00H
+
+; comprobamos si cumple los requisitos
+CONTAR:	   MOV A,M
+   CMP B
+   JNZ SIGUIENTE
+   INR C
+
+; pasamos al siguiente si quedan mas     
+SIGUIENTE: INX H
+   DCR D
+   JNZ CONTAR
+   
+; modificamos los requisitos
+   MOV A,B
+   SUI 20H
+   MOV B,A
+   CPI 65H
+   JNZ INICIO
+   HLT
+
+# ORG FC00H
+# DB 75H, 85H, A5H, 19H, C5H
+			\end{lstlisting}
+			
 \end{document}
 
